@@ -33,5 +33,5 @@ Contributions are welcome! If you'd like to improve or expand this simple calcul
 [Insert license information, if applicable]
 
 # Author
-https://github.com/Chiomaesty
+https://github.com/OkongwuChioma
 
