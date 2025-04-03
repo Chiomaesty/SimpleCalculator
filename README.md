@@ -1,37 +1,26 @@
-# Simple Calculator Program
+# Simple Calculator in C#
 
-# Description
-A C# program that functions as a basic calculator, performing addition, subtraction, multiplication, and division operations.
+# Overview
+This is a console-based calculator written in C#. It allows users to perform basic arithmetic operations (addition, subtraction, multiplication, and division) using an interactive interface. The program supports input validation, exception handling, and a loop for multiple calculations.
 
 # Features
-- Asks user for two numbers
-- Asks user to select an operation (+, -, *, /)
-- Performs the selected operation and displays the result
+- Supports four operations: Addition (+), Subtraction (-), Multiplication (*), and Division (/)  
+- Uses enum for defining mathematical operations  
+- Implements Dictionary<char, Operation> for mapping user input  
+- Exception Handling: Prevents invalid inputs and division by zero  
+- Allows repeated calculations until the user chooses to exit  
 
-# Requirements
-- .NET runtime environment
-- C# compiler
+# How It Works
+1. User enters two numbers.
+2. User selects an operation ('+', '-', '*', '/').
+3. The program performs the calculation.
+4. Displays the result.
+5. The user can choose to continue or exit.
 
-# Usage
-1. Clone or download the repository.
-2. Compile the C# code.
-3. Run the program.
-4. Follow the on-screen prompts to enter numbers and select an operation.
-
-# Example Use Case
-
-Enter the first number: 10
-Enter the second number: 5
-Enter operator (+, -, *, /): +
-Result: 15
-
-
-# Contributing
-Contributions are welcome! If you'd like to improve or expand this simple calculator program, please fork the repository and submit a pull request.
-
-# License
-[Insert license information, if applicable]
-
-# Author
-https://github.com/OkongwuChioma
+## Technologies Used
+- C# (Console Application)
+- .NET Core / .NET Framework
+- Exception Handling (`try-catch`)
+- Data Structures (`Dictionary`)
+- Enums (`enum Operation`)
 
