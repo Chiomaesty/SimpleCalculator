@@ -1,72 +1,87 @@
+using System;
+
 class Program
 {
-    static void Main(string[] args)
-    {
+    enum Operation { Add, Subtract, Multiply, Divide }
 
+    static void Main()
+    {
         while (true)
         {
-            Console.Write("enter first number: ");
-            double x;
-            while (!double.TryParse(Console.ReadLine(), out x))
+            try
             {
-                Console.WriteLine("please enter the right number");
-            }
-            Console.Write("enter second number: ");
-            double y;
-            while (!double.TryParse(Console.ReadLine(), out y))
-            {
-                Console.WriteLine("please enter the right number");
-            }
-
-            Console.WriteLine("enter operator +,-,*,/");
-            char solution = char.Parse(Console.ReadLine());
-
-            while (true)
-            {
-                switch (solution)
+                while (true)
                 {
-                    case '-':
-                        Console.WriteLine($"the answer is {x - y}");
-                        Console.WriteLine();
-                        break;
-                    case '+':
-                        Console.WriteLine($"the answer is {x + y}");
-                        Console.WriteLine();
-                        break;
-                    case '*':
-                        Console.WriteLine($"the answer is {x * y}");
-                        Console.WriteLine();
-                        break;
-                    case '/':
-                        Console.WriteLine($"the answer is {x / y}");
-                        Console.WriteLine();
-                        break;
+                    Console.Write("enter first number: ");
+                    double x = double.Parse(Console.ReadLine());
+                    Console.WriteLine("enter second number");
+                    double y = double.Parse(Console.ReadLine());
+                    Console.WriteLine("enter operator +,-,*,/");
+                    char solution = char.Parse(Console.ReadLine());
 
-                    default:
-                        Console.WriteLine("");
-                        Console.WriteLine();
-                        break;
+                    Dictionary<char, Operation> operationMap = new Dictionary<char, Operation>
+                {
+                    { '+', Operation.Add },
+                    { '-', Operation.Subtract },
+                    { '*', Operation.Multiply },
+                    { '/', Operation.Divide }
 
+                };
+
+                    if (!operationMap.ContainsKey(solution))
+                        throw new ArgumentException("Invalid operation! Please enter +, -, * or /.");
+
+                    Operation operation = operationMap[solution];
+
+                    double result = PerformCalculation(x, y, operation);
+
+                    Console.WriteLine($"Result: {result}");
+
+                    Console.WriteLine("do you want to perform another operation?\nif yes enter 1 \nif no enter 2");
+                    int response = int.Parse(Console.ReadLine());
+
+                    
+                    if (response == 2)
+                    {
+                        Console.WriteLine("thank you for using this service");
+                        break;
+                    }
+                    
                 }
                 break;
             }
-            Console.WriteLine("do you want to perform another operation?\nif yes enter 1 \nif no enter 2");
-            int response;
-
-            while (!int.TryParse(Console.ReadLine(), out response) || response < 0||response >2)
+            catch (FormatException)
             {
-                Console.WriteLine("please select the right option");
+                Console.WriteLine("invalid input! please enter numeric values.");
             }
-
-            if (response == 2)
+            catch (DivideByZeroException)
             {
-                Console.WriteLine("thank you for using this service");
-                break;
+                Console.WriteLine("error! division by zero is not allowed.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"an unexpected error occurred: {ex.Message}");
             }
 
         }
+        static double PerformCalculation(double x, double y, Operation operation)
+        {
+            switch (operation)
+            {
+                case Operation.Add: return x + y;
+                case Operation.Subtract: return x - y;
+                case Operation.Multiply: return x * y;
+                case Operation.Divide:
+                    if (y == 0)
+                        throw new DivideByZeroException();
+                    return x / y;
+                default:
+                    throw new ArgumentException("Invalid operation!");
+            }
 
+        }
     }
+
 
 }
 
