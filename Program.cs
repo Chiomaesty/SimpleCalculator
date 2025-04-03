@@ -1,5 +1,3 @@
-using System;
-
 class Program
 {
     enum Operation { Add, Subtract, Multiply, Divide }
